@@ -1,0 +1,68 @@
+{
+  "weights": {
+    "data_quality": "0.15",
+    "journal_entries": "0.30",
+    "financial_health": "0.30",
+    "reporting_risk": "0.15",
+    "qualitative": "0.10"
+  },
+  "decision_thresholds": {"conditional": "40", "reject": "70"},
+  "data_quality_policy": {"high_field_issue_rate": "0.01"},
+  "je_policy": {
+    "priority_points": {
+      "NO_FLAGS": "0", "LOW": "25", "MEDIUM": "50", "HIGH": "100"
+    }
+  },
+  "reporting_policy": {
+    "no_flags": "0",
+    "review_required": "50"
+  },
+  "qualitative_policy": {
+    "status_points": {
+      "low_risk": "0",
+      "unverified": "50",
+      "high_risk": "100"
+    },
+    "criteria": {
+      "industry": {
+        "status": "unverified",
+        "reason": "The principal industry and its specific risks have not been confirmed.",
+        "evidence": null
+      },
+      "governance": {
+        "status": "unverified",
+        "reason": "Governance arrangements and oversight have not been assessed.",
+        "evidence": null
+      },
+      "management_integrity": {
+        "status": "unverified",
+        "reason": "Management integrity has not been independently assessed.",
+        "evidence": null
+      }
+    }
+  },
+  "financial_policy": {
+    "assessment_points": {
+      "Good": "0", "Needs attention": "50", "Risk": "100"
+    },
+    "dimensions": {
+      "liquidity": [
+        "current_ratio", "quick_ratio", "cash_ratio"
+      ],
+      "capital_structure": [
+        "debt_to_assets", "debt_to_equity", "interest_coverage"
+      ],
+      "operating_efficiency": [
+        "asset_turnover", "receivables_turnover", "inventory_turnover",
+        "days_sales_outstanding", "days_inventory_outstanding",
+        "days_payables_outstanding", "cash_conversion_cycle"
+      ],
+      "profitability_and_earnings_quality": [
+        "gross_margin", "net_margin", "return_on_assets",
+        "return_on_equity", "accrual_ratio"
+      ],
+      "distress_model": ["altman_z_double_prime"]
+    }
+  },
+  "basis": "Illustrative project policy. JE uses an equal mean across ten procedures; financial health uses an equal mean across five dimensions. Scores are not probabilities."
+}

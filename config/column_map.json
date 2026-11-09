@@ -1,0 +1,69 @@
+{
+  "general_ledger": {
+    "format": "A",
+    "sheet": "Sheet",
+    "header_row": 1,
+    "date_format": "%d/%m/%Y",
+    "row_labels": {
+      "opening_balance": ["Số dư đầu kỳ"],
+      "subtotal": ["Cộng"],
+      "closing_balance": ["Số dư cuối kỳ"]
+    },
+    "columns": {
+      "Số chứng từ": "voucher_no",
+      "Loại chứng từ": "voucher_type",
+      "Loại giao dịch": "transaction_type",
+      "Ngày hạch toán": "posting_date",
+      "Ngày chứng từ": "document_date",
+      "Ngày hóa đơn": "invoice_date",
+      "Số hóa đơn": "invoice_no",
+      "Diễn giải": "description",
+      "Tài khoản": "account",
+      "TK đối ứng": "counter_account",
+      "PS Nợ": "debit",
+      "PS Có": "credit",
+      "PS Nợ ngoại tệ": "foreign_debit",
+      "PS Có ngoại tệ": "foreign_credit",
+      "Dư Nợ": "balance_debit",
+      "Dư Có": "balance_credit",
+      "Dự Nợ ngoại tệ": "foreign_balance_debit",
+      "Dư Có Ngoại tệ": "foreign_balance_credit",
+      "Mã đối tượng": "entity_code",
+      "Tên đối tượng": "entity_name",
+      "Mã nhân viên": "employee_code",
+      "Tên nhân viên": "employee_name",
+      "Mã khoản mục CP": "cost_item_code",
+      "Tên khoản mục CP": "cost_item_name",
+      "Mã đơn vị": "organizational_unit_code",
+      "Tên đơn vị": "organizational_unit_name",
+      "Mã thống kê": "statistical_code",
+      "Tên thống kê": "statistical_name",
+      "Mã thu - chi": "receipt_payment_code",
+      "Tên thu - chi": "receipt_payment_name",
+      "Mã tiền tệ": "currency_code",
+      "Tỷ giá": "exchange_rate",
+      "Chi phí hợp lý": "allowable_expense_flag",
+      "Dữ liệu": "additional_data",
+      "Mô tả dữ liệu": "additional_data_description"
+    }
+  },
+  "trial_balance": {
+    "sheet": "Sheet",
+    "header_rows": [
+      2,
+      3
+    ],
+    "data_start_row": 4,
+    "total_row": 150,
+    "columns": {
+      "A": "account",
+      "B": "account_name",
+      "C": "opening_debit",
+      "D": "opening_credit",
+      "E": "debit",
+      "F": "credit",
+      "G": "closing_debit",
+      "H": "closing_credit"
+    }
+  }
+}

@@ -1,0 +1,464 @@
+{
+  "client": {
+    "reference": "case_2024",
+    "name": null,
+    "industry": null
+  },
+  "period_start": "2024-01-01",
+  "period_end": "2024-12-31",
+  "date_gap_days": 30,
+  "balance_tolerance": "0",
+  "voucher_key": [
+    "source_file",
+    "source_sheet",
+    "posting_date",
+    "voucher_no"
+  ],
+  "materiality": {
+    "benchmark": "profit_before_tax",
+    "comparison_rates": {
+      "profit_before_tax": [
+        "0.05"
+      ],
+      "net_revenue": [
+        "0.005",
+        "0.01"
+      ],
+      "total_assets": [
+        "0.01",
+        "0.02"
+      ]
+    },
+    "overall_rate": "0.05",
+    "performance_rate": "0.50",
+    "clearly_trivial_rate": "0.03",
+    "rounding_increment": "1",
+    "benchmark_rationale": "Use observed positive profit before tax, assuming users focus on profitability. Profit stability is unverified; reassess unresolved postings.",
+    "performance_rationale": "Use 50% provisionally because data-quality and statement-evidence issues remain unresolved. This is not a quantified audit-risk estimate.",
+    "clearly_trivial_rationale": "Use 3% of rounded overall materiality as a preliminary accumulation threshold; qualitative matters still require review."
+  },
+  "je_tests": {
+    "voucher_sequence_patterns": [
+      "(?P<series>[CT][0-9]{4}[0-9]{2}(?:0[1-9]|1[0-2]))(?P<sequence>[0-9]{3})",
+      "(?P<series>[A-Z]+[0-9]{2}(?:0[1-9]|1[0-2]))(?P<sequence>[0-9]{2,6})"
+    ],
+    "voucher_sequence_assumption": "Provisional: the captured series, including its embedded period, is an independent sequential register. Different sequence widths are checked separately. Client confirmation is pending.",
+    "round_amount_bases": [
+      "1000000",
+      "10000000"
+    ],
+    "round_amount_assumption": "Illustrative screening multiples in source units; the currency denomination is unconfirmed. Valid contractual payments, advances, estimates and closing entries can be round.",
+    "approval_screening": {
+      "limit": "100000000",
+      "lower_rate": "0.95",
+      "cash_account_prefixes": [
+        "111",
+        "112"
+      ],
+      "threshold_basis": "illustrative_assumption",
+      "assumption": "Illustrative, unconfirmed limit of 100000000 source units. Positive cash/bank credits grouped by the declared voucher key are a payment proxy; reversals are not netted. This is not a verified client approval policy."
+    },
+    "year_end_window_days": 5,
+    "counter_account_rules": [
+      {
+        "rule_id": "asset_revenue",
+        "debit_prefix": "211",
+        "credit_prefix": "511",
+        "material_only": false,
+        "reason": "Review direct fixed-asset/revenue postings and the transaction substance."
+      },
+      {
+        "rule_id": "cash_revenue",
+        "debit_prefix": "111",
+        "credit_prefix": "511",
+        "material_only": true,
+        "reason": "Review large cash-revenue postings, sales evidence, receipts and cut-off."
+      },
+      {
+        "rule_id": "admin_cash",
+        "debit_prefix": "642",
+        "credit_prefix": "111",
+        "material_only": true,
+        "reason": "Review large administrative expenses paid in cash, documents and approvals."
+      }
+    ],
+    "vague_description_phrases": [
+      "điều chỉnh",
+      "khác",
+      "xử lý",
+      "dieu chinh",
+      "khac",
+      "xu ly",
+      "adjustment",
+      "other"
+    ],
+    "benford_populations": {
+      "all_ledger_debit": {
+        "amount_column": "debit",
+        "account_prefixes": []
+      },
+      "all_ledger_credit": {
+        "amount_column": "credit",
+        "account_prefixes": []
+      },
+      "revenue": {
+        "amount_column": "credit",
+        "account_prefixes": [
+          "511",
+          "515",
+          "711"
+        ]
+      },
+      "expenses": {
+        "amount_column": "debit",
+        "account_prefixes": [
+          "621",
+          "622",
+          "627",
+          "632",
+          "635",
+          "641",
+          "642",
+          "811",
+          "821"
+        ]
+      }
+    }
+  },
+  "financial_analysis": {
+    "day_count": 365,
+    "monthly_sd_multiplier": "2",
+    "interest_search_terms": [
+      "interest",
+      "lãi vay",
+      "lai vay"
+    ],
+    "cash_flow_rules": {
+      "cash_prefixes": [
+        "111",
+        "112",
+        "113"
+      ],
+      "operating_prefixes": [
+        "131",
+        "133",
+        "331",
+        "333",
+        "334",
+        "335",
+        "511",
+        "521",
+        "621",
+        "622",
+        "627",
+        "632",
+        "635",
+        "641",
+        "642",
+        "821",
+        "138",
+        "141",
+        "244",
+        "338",
+        "711",
+        "811"
+      ],
+      "investing_prefixes": [
+        "128",
+        "211",
+        "213",
+        "221",
+        "222",
+        "228",
+        "51501",
+        "51511"
+      ],
+      "financing_prefixes": [
+        "341",
+        "411",
+        "421"
+      ],
+      "supplier_prefixes": [
+        "331"
+      ],
+      "capital_asset_prefixes": [
+        "211",
+        "213"
+      ],
+      "assumption": "Estimate for the 2024 exercise: employee advances, insurance/tax collections, incidental receipts, operating deposits and ordinary other receivables/payables are operating unless source codes or specific descriptions identify another activity. Interest/deposit-investment receipts are investing. Distinguish vehicle acquisition from maintenance for the same supplier. Explicit currency valuation and prior-opening corrections are noncash adjustments; Jan-1 OD23 cash records described as opening are assumed opening adjustments for CFO only. Keep signed amounts and unresolved cases; no raw entries or balances are changed. Explicit customer-code balance transfers and their reversals are noncash reclassifications.",
+      "noncash_review_terms": [
+        "đánh giá",
+        "danh gia",
+        "chưa thực hiện",
+        "chua thuc hien",
+        "USD = 0",
+        "điều chỉnh chênh lệch tỷ giá tài khoản"
+      ],
+      "receipt_payment_codes": {
+        "101": "operating",
+        "102": "operating",
+        "104": "operating",
+        "106": "operating",
+        "203": "operating",
+        "204": "operating",
+        "205": "operating",
+        "207": "operating",
+        "208": "operating",
+        "209": "operating",
+        "21": "operating",
+        "210": "operating",
+        "211": "operating",
+        "212": "operating",
+        "213": "operating",
+        "214": "operating",
+        "215": "operating",
+        "22": "operating",
+        "23": "operating",
+        "30": "operating",
+        "31": "operating",
+        "31.1": "operating",
+        "32": "operating",
+        "33": "operating",
+        "34": "operating",
+        "35": "operating",
+        "36": "operating",
+        "40": "operating",
+        "41": "operating",
+        "42": "operating",
+        "43": "operating",
+        "47": "operating",
+        "49": "operating",
+        "49.1": "operating",
+        "49.4": "operating",
+        "49.5": "operating",
+        "50": "operating",
+        "51": "operating",
+        "52": "operating",
+        "53": "operating",
+        "54": "operating",
+        "56": "operating",
+        "60": "operating",
+        "70": "operating",
+        "71": "operating",
+        "72": "operating",
+        "74": "operating",
+        "80": "operating",
+        "92": "operating",
+        "103": "investing",
+        "107": "investing",
+        "109": "financing",
+        "55": "financing",
+        "91": "operating"
+      },
+      "description_rules": [
+        {
+          "rule_id": "vehicle_acquisition",
+          "counter_prefixes": [
+            "331"
+          ],
+          "terms": [
+            "kia0278/2024/hdmb",
+            "mua xe"
+          ],
+          "category": "investing"
+        },
+        {
+          "rule_id": "vehicle_maintenance",
+          "counter_prefixes": [
+            "331"
+          ],
+          "terms": [
+            "bảo dưỡng",
+            "sửa xe",
+            "sửa chữa",
+            "bao duong",
+            "sua xe",
+            "sua chua"
+          ],
+          "category": "operating"
+        },
+        {
+          "rule_id": "deposit_interest_settlement",
+          "counter_prefixes": [
+            "138"
+          ],
+          "terms": [
+            "hdtg",
+            "hợp đồng tiền gửi"
+          ],
+          "category": "investing"
+        },
+        {
+          "rule_id": "currency_valuation",
+          "counter_prefixes": [
+            "515",
+            "635",
+            "711",
+            "811"
+          ],
+          "terms": [
+            "usd = 0",
+            "điều chỉnh số dư quy đổi"
+          ],
+          "category": "noncash_adjustment"
+        },
+        {
+          "rule_id": "prior_opening_correction",
+          "counter_prefixes": [
+            "515"
+          ],
+          "terms": [
+            "điều chỉnh số dư đầu kỳ"
+          ],
+          "category": "noncash_adjustment"
+        },
+        {
+          "rule_id": "customer_reference_reclassification",
+          "counter_prefixes": [
+            "131"
+          ],
+          "terms": [
+            "chuyển số dư"
+          ],
+          "category": "noncash_adjustment"
+        }
+      ],
+      "opening_adjustment_date": "2024-01-01",
+      "opening_voucher_prefixes": [
+        "OD23"
+      ],
+      "opening_description_terms": [
+        "đầu kỳ"
+      ]
+    },
+    "benchmark_references": {
+      "current_ratio": {
+        "benchmark_basis": "source_informed_project_screen",
+        "source_url": "https://www.business.qld.gov.au/running-business/finance/improve-performance/ratios",
+        "policy_note": "1.5/1 adapted from the reference; confirm maturity and realizability."
+      },
+      "net_margin": {
+        "benchmark_basis": "source_informed_project_screen",
+        "source_url": "https://www.business.qld.gov.au/running-business/finance/improve-performance/ratios",
+        "policy_note": "10%/5% adapted from general guidance; industry suitability unverified."
+      },
+      "return_on_assets": {
+        "benchmark_basis": "source_informed_project_screen",
+        "source_url": "https://www.business.qld.gov.au/running-business/finance/improve-performance/ratios",
+        "policy_note": "5% adapted from general guidance; this assignment uses average assets."
+      },
+      "inventory_turnover": {
+        "benchmark_basis": "source_informed_project_screen",
+        "source_url": "https://www.business.qld.gov.au/running-business/finance/improve-performance/ratios",
+        "policy_note": "5 is reference-informed; below 1 is a project warning."
+      },
+      "receivables_turnover": {
+        "benchmark_basis": "source_informed_project_screen",
+        "source_url": "https://www.business.qld.gov.au/running-business/finance/improve-performance/ratios",
+        "policy_note": "Derived from 365/40 and 365/80; net revenue approximates credit sales."
+      },
+      "days_sales_outstanding": {
+        "benchmark_basis": "source_informed_project_screen",
+        "source_url": "https://www.business.qld.gov.au/running-business/finance/improve-performance/ratios",
+        "policy_note": "40 days is reference-informed; above 80 is a project warning."
+      },
+      "days_inventory_outstanding": {
+        "benchmark_basis": "source_informed_project_screen",
+        "source_url": "https://www.business.qld.gov.au/running-business/finance/improve-performance/ratios",
+        "policy_note": "Derived from inventory turnover thresholds: 365/5 and 365/1."
+      },
+      "debt_to_assets": {
+        "benchmark_basis": "source_informed_project_screen",
+        "source_url": "https://www.business.qld.gov.au/running-business/finance/improve-performance/ratios",
+        "policy_note": "60% is reference-informed; 100% flags nonpositive net assets."
+      },
+      "debt_to_equity": {
+        "benchmark_basis": "source_informed_project_screen",
+        "source_url": "https://www.bdc.ca/en/articles-tools/entrepreneur-toolkit/financial-tools/debt-to-equity-ratio",
+        "policy_note": "2.5/5 adapt BDC guidance; not contractual lending limits."
+      },
+      "gross_margin": {
+        "benchmark_basis": "illustrative_project_policy",
+        "source_url": null,
+        "policy_note": "20%/10% are project targets, not industry averages."
+      },
+      "return_on_equity": {
+        "benchmark_basis": "illustrative_project_policy",
+        "source_url": null,
+        "policy_note": "10%/0 are project targets; client cost of equity is unverified."
+      },
+      "asset_turnover": {
+        "benchmark_basis": "illustrative_project_policy",
+        "source_url": null,
+        "policy_note": "1/0.5 are project targets; asset intensity varies by industry."
+      },
+      "days_payables_outstanding": {
+        "benchmark_basis": "illustrative_project_policy",
+        "source_url": null,
+        "policy_note": "30/90 days are project targets, not supplier due dates."
+      },
+      "cash_conversion_cycle": {
+        "benchmark_basis": "illustrative_project_policy",
+        "source_url": null,
+        "policy_note": "60/120 days are project funding targets; retain negative values."
+      },
+      "quick_ratio": {
+        "benchmark_basis": "illustrative_project_policy",
+        "source_url": "https://www.business.qld.gov.au/running-business/finance/improve-performance/ratios",
+        "policy_note": "1 is reference-informed; below 0.5 is a project warning."
+      },
+      "cash_ratio": {
+        "benchmark_basis": "illustrative_project_policy",
+        "source_url": null,
+        "policy_note": "0.5/0.2 are project liquidity targets."
+      },
+      "interest_coverage": {
+        "benchmark_basis": "illustrative_project_policy",
+        "source_url": null,
+        "policy_note": "3 is a project target; below 1 means EBIT does not cover interest."
+      },
+      "accrual_ratio": {
+        "benchmark_basis": "illustrative_project_policy",
+        "source_url": null,
+        "policy_note": "Absolute 5%/10% are project targets. Keep the sign; negative accruals do not establish fraud."
+      },
+      "altman_z_double_prime": {
+        "benchmark_basis": "assignment_reference",
+        "source_url": null,
+        "policy_note": "Assignment: safe >2.6; grey 1.1–2.6; distress <1.1. Applicability unverified."
+      }
+    },
+    "monthly_adjustment_review": {
+      "revenue_accounts": [
+        "5119"
+      ],
+      "cost_accounts": [
+        "6325"
+      ],
+      "counter_prefix": "33322",
+      "description_terms": [
+        "ttdb",
+        "ttđb"
+      ],
+      "basis": "Account names and source voucher descriptions identify excise-tax-related entries; accounting/tax correctness is unverified. Removing them is a sensitivity only."
+    },
+    "non_interest_search_terms": [
+      "tỷ giá",
+      "ty gia",
+      "exchange loss",
+      "exchange difference",
+      "phí chuyển tiền",
+      "phi chuyen tien",
+      "phí ngân hàng",
+      "phi ngan hang",
+      "bank fee"
+    ],
+    "source_cost_categories": {
+      "B29": "interest",
+      "B25": "non_interest",
+      "B30": "non_interest",
+      "B31": "non_interest",
+      "B33": "non_interest"
+    }
+  }
+}
