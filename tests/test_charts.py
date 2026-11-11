@@ -307,7 +307,9 @@ def test_weekday_heatmap_matches_hand_counts(visual_tables, tmp_path, monkeypatc
             assert ax.images[0].get_array().tolist() == [[2, 1, 0, 0, 0, 0, 1]]
             assert ax.get_xticklabels()[-1].get_text() == "Chủ nhật"
             assert filename == "09_posting_weekday_heatmap.png"
-            assert "giờ nhập liệu" in kwargs["note"]
+            assert "Có ngày hợp lệ: 4" in kwargs["note"]
+            assert "thiếu/ngày không hợp lệ: 0" in kwargs["note"]
+            assert "Đếm dòng chuẩn hóa" in kwargs["note"]
         finally:
             plt.close(fig)
     monkeypatch.setattr(builder, "_save", inspect)

@@ -4,11 +4,11 @@ Dự án môn Phân tích dữ liệu trong kế toán – kiểm toán, lớp K
 Chương trình kiểm tra sổ kế toán năm 2024, lập BCTC rút gọn, phân tích tài chính
 và hỗ trợ đánh giá chấp nhận khách hàng kiểm toán.
 
-Báo cáo: [Word](Audit_Report_Group_05.docx) · [PDF](Audit_Report_Group_05.pdf).
+Báo cáo: [Word](<Midterm report - group 5 .docx>) · [PDF](<Midterm report - group 5.pdf>).
 
 ## Chạy chương trình
 
-Dùng Python 3.9 trở lên. Mở Terminal tại thư mục `Audit-UEL`:
+Dùng Python. Mở Terminal tại thư mục `Audit-UEL`:
 
 ```bash
 python3 -m venv .venv
@@ -76,7 +76,6 @@ classmethod/staticmethod, composition, ngoại lệ và Factory/Strategy/Registr
 FP gồm hàm thuần, lambda, map/filter, reduce, closure, decorator, partial,
 generator, itertools, pipeline, bất biến và comprehension.
 
-## Cách hiểu kết quả
 
 - Giữ nguyên raw và tham chiếu file/sheet/dòng; không tự điền tiền thiếu, sửa
   tiền để ép cân hay cộng trùng tài khoản cha/con. Sổ giữ kết chuyển; KQKD loại
